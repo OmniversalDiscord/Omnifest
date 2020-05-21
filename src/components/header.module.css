@@ -1,0 +1,17 @@
+.header {
+    display: flex;
+    margin: 2px 6px;
+    align-items: center;
+}
+
+.header > img {
+    height: 100%;
+    width: auto;
+    margin-right: 8px;
+}
+
+.header > h1 {
+    margin: 0px;
+    margin-bottom: 2px;
+    font-size: 20px;
+}

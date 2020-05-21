@@ -1,3 +1,5 @@
+@import url("https://use.typekit.net/sjt5wyo.css");
+
 html, body {
   margin: 0;
   padding: 0;
@@ -13,7 +15,7 @@ html, body {
   width: 100%;
 }
 
-.particles {
+.particles, .header {
   top: 0px;
   left: 0px;
   position: fixed;
@@ -23,4 +25,14 @@ main {
   max-width: 1000px;
   margin: auto;
   display: flex;
+  flex-direction: column;
+}
+
+.header {
+  height: 50px;
+}
+
+h1, p {
+  color: white;
+  font-family: sofia-pro, sans-serif;
 }
