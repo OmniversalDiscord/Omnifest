@@ -33,8 +33,10 @@ const Controls = ({ className, name, artists, playing, muted, loaded, onPlayClic
                     <Volume onUpdate={onVolumeChange}></Volume>
                 </div>
                 <div>
-                    <h1 style={{color: "white"}}>{name}</h1>
-                    <p style={{color: "white"}}>{artists}</p>
+                    {name !== null &&
+                        <p>{name}</p>
+                    }
+                    <h1>{artists}</h1>
                 </div>
             </div>
       </div>

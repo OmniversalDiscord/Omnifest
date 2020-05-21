@@ -3,8 +3,6 @@ import AudioSpectrum from 'react-audio-spectrum';
 
 import Layout from "../components/layout";
 import Controls from "../components/controls/controls";
-import Volume from "../components/controls/volume";
-import SEO from "../components/seo";
 
 const IndexPage = () => {
   const streamUrl = "http://audio.omniversal.co:8000/festival.mp3"

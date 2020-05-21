@@ -1,17 +1,28 @@
 .header {
+    height: 100%;
     display: flex;
     margin: 2px 6px;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
-.header > img {
+.wrapper {
     height: 100%;
-    width: auto;
-    margin-right: 8px;
+    display: flex;
+    
+    align-items: center;
 }
 
-.header > h1 {
+.wrapper > img, .wrapper > a, .wrapper > a > img {
+    height: 100%;
+    margin-left: 4px;
+    margin-right: 2px;
+}
+
+.header > div > h1 {
     margin: 0px;
     margin-bottom: 2px;
+    margin-left: 6px;
     font-size: 20px;
 }
