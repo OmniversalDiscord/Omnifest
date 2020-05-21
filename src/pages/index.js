@@ -2,21 +2,26 @@ import React, { useState, useEffect, useRef } from 'react';
 import AudioSpectrum from 'react-audio-spectrum';
 
 import Layout from "../components/layout";
-import Controls from "../components/controls";
+import Controls from "../components/controls/controls";
+import Volume from "../components/controls/volume";
 import SEO from "../components/seo";
 
 const IndexPage = () => {
+  const streamUrl = "http://audio.omniversal.co:8000/festival.mp3"
+
   const [name, setName] = useState("");
   const [artists, setArtists] = useState("");
   const [playing, setPlaying] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [muted, setMuted] = useState(false);
   const [stream, setStream] = useState(null);
+  const [volume, setVolume] = useState(1);
 
   const ws = useRef(null);
 
   useEffect(() => {
     ws.current = new WebSocket('ws://audio.omniversal.co:8002');
-    setStream(new Audio("http://audio.omniversal.co:8000/festival.mp3"));
+    setStream(new Audio(streamUrl));
     
     return () => {
       ws.current.close();
@@ -42,14 +47,45 @@ const IndexPage = () => {
     }
   });
 
+  const pause = () => {
+    setPlaying(false);
+    stream.pause();
+    stream.src = "";
+    setTimeout(function () { 
+      stream.load(); // This stops the stream from downloading
+    });
+  }
+
+  const play = () => {
+    setPlaying(true);
+    setLoaded(false);
+    stream.src = streamUrl;
+    stream.load();
+    stream.play();
+  }
+
   const togglePlaying = () => {
     if (playing) {
-      console.log("hi");
-      setPlaying(false);
-      stream.pause();
+      pause();
     } else {
-      setPlaying(true);
-      stream.play();
+      play();
+    }
+  }
+
+  const toggleMuted = () => {
+    if (muted) {
+      setMuted(false);
+      stream.volume = volume;
+    } else {
+      setMuted(true);
+      stream.volume = 0;
+    }
+  }
+
+  const changeVolume = newVolume => {
+    if (!isNaN(newVolume)) {
+      setVolume(1 - newVolume);
+      stream.volume = volume;
     }
   }
 
@@ -69,7 +105,17 @@ const IndexPage = () => {
           gap={4}
         />
       }
-      <Controls className="controls" name={name} artists={artists} playing={playing} loaded={loaded} onPlayClick={togglePlaying}></Controls>
+      <Controls 
+        className="controls" 
+        name={name} 
+        artists={artists}
+        playing={playing}
+        muted={muted}
+        loaded={loaded} 
+        onPlayClick={togglePlaying} 
+        onMuteClick={toggleMuted}
+        onVolumeChange={changeVolume}
+      />
     </Layout>
   )
 }

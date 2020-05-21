@@ -10,20 +10,21 @@
   z-index: 9999;
 }
 
-.controls > button {
-   all: unset;
-   cursor: pointer !important;
-   display: flex;
-   align-items: center;
+.iconButton {
+    all: unset;
+    cursor: pointer !important;
+    display: flex;
+    align-items: center;
+
+    z-index: 9999;
 }
 
-.controls > button > i {
+.iconButton > i {
     font-size: 75px;
 }
 
 .controls > div > h1, p {
     margin: 0px;
-    margin-left: 16px;
     margin-top: -2px;
 }
 
