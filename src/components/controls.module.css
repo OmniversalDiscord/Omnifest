@@ -1,0 +1,37 @@
+.controls {
+    display: flex;
+    align-items: center;
+    z-index: 9999;
+    margin-top: 16px;
+    max-width: fit-content;
+}
+
+.controls > * {
+  z-index: 9999;
+}
+
+.controls > button {
+   all: unset;
+   cursor: pointer !important;
+   display: flex;
+   align-items: center;
+}
+
+.controls > button > i {
+    font-size: 75px;
+}
+
+.controls > div > h1, p {
+    margin: 0px;
+    margin-left: 16px;
+    margin-top: -2px;
+}
+
+.controls > div > h1 {
+    font-weight: 800;
+    line-height: 40px;
+}
+
+.controls > div > p {
+    opacity: 0.87;
+}
