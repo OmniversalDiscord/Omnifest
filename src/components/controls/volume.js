@@ -15,49 +15,48 @@ const domain = [0, 1]
 
 const Volume = ({onUpdate}) => {
     return (
-        <div>
-            <Slider
-                vertical
-                mode={1}
-                step={0.01}
-                domain={domain}
-                rootStyle={sliderStyle}
-                values={[0]}
-                onUpdate={onUpdate}
-            >
+        <Slider
+            vertical
+            mode={1}
+            step={0.01}
+            domain={domain}
+            rootStyle={sliderStyle}
+            values={[0]}
+            onChange={onUpdate}
+            onUpdate={onUpdate}
+        >
             <Rail>
                 {({ getRailProps }) => <SliderRail getRailProps={getRailProps} />}
             </Rail>
             <Handles>
                 {({ handles, getHandleProps }) => (
-                <div className="slider-handles">
-                    {handles.map(handle => (
-                    <Handle
-                        key={handle.id}
-                        handle={handle}
-                        domain={domain}
-                        getHandleProps={getHandleProps}
-                    />
+                    <div className="slider-handles">
+                        {handles.map(handle => (
+                            <Handle
+                            key={handle.id}
+                            handle={handle}
+                            domain={domain}
+                            getHandleProps={getHandleProps}
+                        />
                     ))}
-                </div>
+                    </div>
                 )}
             </Handles>
             <Tracks right={false}>
                 {({ tracks, getTrackProps }) => (
-                <div className="slider-tracks">
-                    {tracks.map(({ id, source, target }) => (
-                    <Track
-                        key={id}
-                        source={source}
-                        target={target}
-                        getTrackProps={getTrackProps}
-                    />
-                    ))}
-                </div>
+                    <div className="slider-tracks">
+                        {tracks.map(({ id, source, target }) => (
+                            <Track
+                            key={id}
+                            source={source}
+                            target={target}
+                            getTrackProps={getTrackProps}
+                            />
+                        ))}
+                    </div>
                 )}
             </Tracks>
-            </Slider>
-        </div>
+        </Slider>
     )
 }
 

@@ -15,7 +15,6 @@ const IndexPage = () => {
   const [loaded, setLoaded] = useState(false);
   const [muted, setMuted] = useState(false);
   const [stream, setStream] = useState(null);
-  const [volume, setVolume] = useState(1);
 
   const ws = useRef(null);
 
@@ -75,17 +74,25 @@ const IndexPage = () => {
   const toggleMuted = () => {
     if (muted) {
       setMuted(false);
-      stream.volume = volume;
+      stream.muted = false;
     } else {
       setMuted(true);
-      stream.volume = 0;
+      stream.muted = true;
     }
   }
 
-  const changeVolume = newVolume => {
-    if (!isNaN(newVolume)) {
-      setVolume(1 - newVolume);
-      stream.volume = volume;
+  const changeVolume = values => {
+    const volume = values[0]
+
+    if (!isNaN(volume)) {
+      stream.volume = 1 - volume
+    }
+
+    if (volume === 1) {
+      setMuted(true);
+    } else {    
+      setMuted(false);
+      stream.muted = false;
     }
   }
 
