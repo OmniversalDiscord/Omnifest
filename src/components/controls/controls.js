@@ -34,7 +34,7 @@ const Controls = ({ className, name, artists, playing, muted, loaded, onPlayClic
                 </div>
                 <div>
                     {name !== null &&
-                        <p>{name}</p>
+                        <p>{name.toUpperCase()}</p>
                     }
                     <h1>{artists}</h1>
                 </div>

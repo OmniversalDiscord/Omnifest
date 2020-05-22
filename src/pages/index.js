@@ -5,7 +5,7 @@ import Layout from "../components/layout";
 import Controls from "../components/controls/controls";
 
 const IndexPage = () => {
-  const streamUrl = "http://audio.omniversal.co:8000/festival.mp3"
+  const streamUrl = "http://audio.omniversal.co:8000/stream.mp3"
 
   const [name, setName] = useState("");
   const [artists, setArtists] = useState("");
