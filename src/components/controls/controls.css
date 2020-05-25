@@ -1,3 +1,5 @@
+/* Extra CSS for volume sider, since :hover doesn't work on module CSS */
+
 .volume-button {
     margin-left: 16px;
     margin-right: 16px;

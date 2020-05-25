@@ -13,7 +13,7 @@ const sliderStyle = {
 
 const domain = [0, 1]
 
-const Volume = ({onUpdate}) => {
+const Volume = ({onUpdate, value}) => {
     return (
         <Slider
             vertical
@@ -21,7 +21,7 @@ const Volume = ({onUpdate}) => {
             step={0.01}
             domain={domain}
             rootStyle={sliderStyle}
-            values={[0]}
+            values={[value]}
             onChange={onUpdate}
             onUpdate={onUpdate}
         >
@@ -61,7 +61,8 @@ const Volume = ({onUpdate}) => {
 }
 
 Volume.propTypes = {
-    onUpdate: PropTypes.func.isRequired
+    onUpdate: PropTypes.func.isRequired,
+    value: PropTypes.number.isRequired
 }
 
 export default Volume

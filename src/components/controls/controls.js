@@ -6,7 +6,7 @@ import Volume from './volume';
 import controlStyles from "./controls.module.css";
 import './controls.css';
 
-const Controls = ({ className, name, artists, playing, muted, loaded, onPlayClick, onMuteClick, onVolumeChange }) => {
+const Controls = ({ className, name, artists, playing, muted, loaded, volume, onPlayClick, onMuteClick, onVolumeChange }) => {
     var play_button;
     var volume_button;
 
@@ -30,7 +30,7 @@ const Controls = ({ className, name, artists, playing, muted, loaded, onPlayClic
                 {play_button}
                 {volume_button}
                 <div className="volume-wrapper">
-                    <Volume onUpdate={onVolumeChange}></Volume>
+                    <Volume onUpdate={onVolumeChange} value={volume}></Volume>
                 </div>
                 <div>
                     {name !== null &&
@@ -50,6 +50,7 @@ Controls.propTypes = {
     playing: PropTypes.bool.isRequired,
     muted: PropTypes.bool.isRequired,
     loaded: PropTypes.bool.isRequired,
+    volume: PropTypes.number.isRequired,
     onPlayClick: PropTypes.func.isRequired,
     onMuteClick: PropTypes.func.isRequired,
     onVolumeChange: PropTypes.func.isRequired

@@ -11,6 +11,7 @@ const IndexPage = () => {
   const [artists, setArtists] = useState("");
   const [playing, setPlaying] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [loadedVolume, setLoadedVolume] = useState(0);
   const [muted, setMuted] = useState(false);
   const [stream, setStream] = useState(null);
 
@@ -18,6 +19,7 @@ const IndexPage = () => {
 
   useEffect(() => {
     ws.current = new WebSocket('ws://audio.omniversal.co:8002');
+
     setStream(new Audio(streamUrl));
     
     return () => {
@@ -27,7 +29,8 @@ const IndexPage = () => {
 
   useEffect(() => {
     if (stream != null) {
-      stream.crossOrigin = "anonymous";
+      loadVolume();
+      loadMuted();
       setPlaying(true);
       stream.play();
 
@@ -49,7 +52,7 @@ const IndexPage = () => {
     stream.pause();
     stream.src = "";
     setTimeout(function () { 
-      stream.load(); // This stops the stream from downloading
+      stream.load(); // Stop the stream downloading in the background
     });
   }
 
@@ -77,31 +80,72 @@ const IndexPage = () => {
       setMuted(true);
       stream.muted = true;
     }
+
+    saveMuted();
   }
 
   const changeVolume = values => {
-    const volume = values[0]
+    const volume = values[0];
 
     if (!isNaN(volume)) {
-      stream.volume = 1 - volume
-    }
+      stream.volume = 1 - volume;
 
-    if (volume === 1) {
-      setMuted(true);
-    } else {    
-      setMuted(false);
-      stream.muted = false;
+      if (volume === 1) {
+        setMuted(true);
+      } else {    
+        setMuted(false);
+        stream.muted = false;
+      }
+  
+      saveVolume();
     }
+  }
+
+  const loadVolume = () => {
+    if (typeof window !== "undefined") {
+      if (localStorage.getItem("volume")) {
+        const rawVolume = parseFloat(localStorage.getItem("volume"))
+        setLoadedVolume(rawVolume);
+        stream.volume = 1 - rawVolume;
+      }
+    }
+  }
+
+  const saveVolume = () => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem('volume', 1 - stream.volume);
+    }
+  }
+  
+  const loadMuted = () => {
+    if (typeof window !== "undefined") {
+      if (localStorage.getItem("muted")) {
+        const rawMuted = localStorage.getItem("muted") === 'true'
+        setMuted(rawMuted);
+        stream.muted = rawMuted;
+      }
+    }
+  }
+  
+  const saveMuted = () => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem('muted', stream.muted);
+    }
+  }
+  
+  const streamWithCORS = () => {
+    stream.crossOrigin = "anonymous";
+    return stream;
   }
 
   return (
     <Layout>
-      {stream !== null &&
+      {stream !== null && 
         <AudioSpectrum
           id="visualizer"
           height={200}
           width={1000}
-          audioEle={stream}
+          audioEle={streamWithCORS()}
           capHeight={2}
           capColor={'transparent'}
           meterWidth={6}
@@ -117,6 +161,7 @@ const IndexPage = () => {
         playing={playing}
         muted={muted}
         loaded={loaded} 
+        volume={loadedVolume}
         onPlayClick={togglePlaying} 
         onMuteClick={toggleMuted}
         onVolumeChange={changeVolume}
