@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import { Slider, Rail, Handles, Tracks } from 'react-compound-slider';
 import { SliderRail, Handle, Track } from './volume-components'; 
 
+/*
+    Do not venture here
+*/
+
 const sliderStyle = {
     position: 'absolute',
     height: '150px',
@@ -30,7 +34,7 @@ const Volume = ({onUpdate, value}) => {
             </Rail>
             <Handles>
                 {({ handles, getHandleProps }) => (
-                    <div className="slider-handles">
+                    <div className='slider-handles'>
                         {handles.map(handle => (
                             <Handle
                             key={handle.id}
@@ -44,7 +48,7 @@ const Volume = ({onUpdate, value}) => {
             </Handles>
             <Tracks right={false}>
                 {({ tracks, getTrackProps }) => (
-                    <div className="slider-tracks">
+                    <div className='slider-tracks'>
                         {tracks.map(({ id, source, target }) => (
                             <Track
                             key={id}

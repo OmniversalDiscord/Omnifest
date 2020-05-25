@@ -1,38 +1,58 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from 'react'
+import PropTypes from 'prop-types'
 import ReactLoading from 'react-loading';
 
 import Volume from './volume';
-import controlStyles from "./controls.module.css";
+import controlStyles from './controls.module.css';
 import './controls.css';
 
-const Controls = ({ className, name, artists, playing, muted, loaded, volume, onPlayClick, onMuteClick, onVolumeChange }) => {
-    var play_button;
-    var volume_button;
+/*
+    Media controls for livestream playback
+*/
 
-    if (playing && loaded) {
-        play_button = <button className={controlStyles.iconButton} onClick={onPlayClick}><i className="material-icons material-icons-round">pause_circle_filled</i></button>;
-    } else if (playing && !loaded) {
-        play_button = <ReactLoading type={"bars"} height={75} width={75} />
-    } else { 
-        play_button = <button className={controlStyles.iconButton} onClick={onPlayClick}><i className="material-icons material-icons-round">play_circle_filled</i></button>
-    }
+// Define JSX button elements that can update based on playing, loading and muted states
+const PlayButton = ({ playing, loaded, onPlayClick }) => {
+    // Change the icon based on whether the stream is playing or stopped
+    const icon = playing ? 'pause_circle_filled' : 'play_circle_filled';
 
-    if (muted) {
-        volume_button = <button className={`volume-button ${controlStyles.iconButton}`} onClick={onMuteClick}><i className="material-icons material-icons-round">volume_off</i></button>
+    if (!loaded & playing) {
+        // If we're trying to play but the stream isn't loaded, show an animation
+        return <ReactLoading type={'bars'} height={75} width={75} />;
     } else {
-        volume_button = <button className={`volume-button ${controlStyles.iconButton}`} onClick={onMuteClick}><i className="material-icons material-icons-round">volume_up</i></button>
+        // Otherwise just show the button
+        return <button className={controlStyles.iconButton} onClick={onPlayClick}><i className='material-icons material-icons-round'>{icon}</i></button>;
     }
+}
 
+PlayButton.propTypes = {
+    playing: PropTypes.bool.isRequired,
+    loaded: PropTypes.bool.isRequired,
+    onPlayClick: PropTypes.func.isRequired
+}
+
+const VolumeButton = ({ muted, onMuteClick }) => {
+    // Change the icon based on whether the stream is muted
+    const icon = muted ? 'volume_off' : 'volume_up'
+
+    return <button className={`volume-button ${controlStyles.iconButton}`} onClick={onMuteClick}><i className='material-icons material-icons-round'>{icon}</i></button>;
+}
+
+VolumeButton.propTypes = {
+    muted: PropTypes.bool.isRequired,
+    onMuteClick: PropTypes.func.isRequired
+}
+
+const Controls = ({ className, name, artists, playing, muted, loaded, volume, onPlayClick, onMuteClick, onVolumeChange }) => {
     return (
         <div>
             <div className={`${className} ${controlStyles.controls}`}>
-                {play_button}
-                {volume_button}
-                <div className="volume-wrapper">
-                    <Volume onUpdate={onVolumeChange} value={volume}></Volume>
+                <PlayButton playing={playing} loaded={loaded} onPlayClick={onPlayClick} />
+                <VolumeButton muted={muted} onMuteClick={onMuteClick} />
+                <div className='volume-wrapper'>
+                    <Volume onUpdate={onVolumeChange} value={volume} />
                 </div>
                 <div>
+                    {/* If there's no B2B name, don't show it */}
                     {name !== null &&
                         <p>{name.toUpperCase()}</p>
                     }

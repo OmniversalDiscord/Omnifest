@@ -68,7 +68,7 @@ export function Handle({
         {...getHandleProps(id)}
       />
       <div
-        role="slider"
+        role='slider'
         aria-valuemin={min}
         aria-valuemax={max}
         aria-valuenow={value}
