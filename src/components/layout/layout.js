@@ -1,20 +1,20 @@
 import React from "react"
 import PropTypes from "prop-types"
-import particleSettings from '../settings/particlesjs-config.json';
-
-import Particles from 'react-particles-js';
+import { Helmet } from "react-helmet"
 
 import Header from './header.js';
+import Background from './background.js';
 import "./layout.css"
 
 const Layout = ({ children }) => {
 
   return (
     <>
-      <Particles className="particles"
-        params={particleSettings}
-      />
-      <Header className="header"></Header>
+      <Helmet>
+        <title>Trash Bash</title>
+      </Helmet>
+      <Background />
+      <Header />
       <main>{children}</main>
     </>
   )

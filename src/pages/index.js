@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { graphql } from "gatsby"
 import AudioSpectrum from 'react-audio-spectrum';
 
-import Layout from '../components/layout';
+import Layout from '../components/layout/layout';
 import Controls from '../components/controls/controls';
 
-const IndexPage = () => {
-  const streamUrl = 'http://audio.omniversal.co:8000/stream.mp3'
+const IndexPage = ({ data }) => {
+  const streamUrl = data.config.childSettingsJson.streamUrl
 
   // Basic state variables
   const [name, setName] = useState('');
@@ -26,7 +27,7 @@ const IndexPage = () => {
 
   // Only run once
   useEffect(() => {
-    ws.current = new WebSocket('ws://audio.omniversal.co:8002');
+    ws.current = new WebSocket(data.config.childSettingsJson.websocketUrl);
 
     // Stream has to be set here so that the site compiles
     // as GatsbyJS doesn't have an Audio function
@@ -208,5 +209,16 @@ const IndexPage = () => {
     </Layout>
   )
 }
+
+export const query = graphql`
+  query IndexQuery {
+    config: file(relativePath: { eq:"config.json"}) {
+      childSettingsJson {
+        streamUrl,
+        websocketUrl
+      }
+    }
+  }
+`
 
 export default IndexPage

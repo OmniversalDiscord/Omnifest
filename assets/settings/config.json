@@ -1,0 +1,8 @@
+
+{
+    "name": "Trash Bash",
+    "discord": "https://discord.gg/nhgC2gH",
+    "streamUrl": "http://audio.omniversal.co:8000/festival.mp3",
+    "websocketUrl": "ws://audio.omniversal.co:8002/",
+    "background": "particles"
+}

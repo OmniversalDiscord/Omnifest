@@ -1,13 +1,9 @@
 module.exports = {
-  siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
-  },
   plugins: [
     `gatsby-transformer-json`,
     `gatsby-plugin-sharp`, 
     `gatsby-transformer-sharp`,
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -22,5 +18,17 @@ module.exports = {
         path: `${__dirname}/assets/settings`,
       },
     },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: "Trash Bash",
+        short_name: "Trash Bash",
+        start_url: "/",
+        background_color: "#000000",
+        theme_color: "#000000",
+        display: "browser",
+        icon: `${__dirname}/assets/images/icon.png`,
+      },
+    }
   ],
 }

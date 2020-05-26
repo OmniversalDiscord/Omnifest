@@ -35,12 +35,8 @@ i {
   color: white;
 }
 
-.particles, .header {
+.particles {
   top: 0px;
   left: 0px;
   position: fixed;
-}
-
-.header {
-  height: 50px;
 }
