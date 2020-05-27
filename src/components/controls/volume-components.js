@@ -16,7 +16,6 @@ const railOuterStyle = {
   transform: 'translate(-50%, 0%)',
   borderRadius: 7,
   cursor: 'pointer',
-  // border: '1px solid white',
 }
 
 const railInnerStyle = {
@@ -62,7 +61,6 @@ export function Handle({
           width: 42,
           height: 28,
           cursor: 'pointer',
-          // border: '1px solid white',
           backgroundColor: 'none',
         }}
         {...getHandleProps(id)}

@@ -11,7 +11,7 @@ html, body {
   overflow: hidden;
 }
 
-#___gatsby, #gatsby-focus-wrapper, .particles {
+#___gatsby, #gatsby-focus-wrapper {
   height: 100%;
   width: 100%;
 }
@@ -33,10 +33,4 @@ h1, p {
 
 i {
   color: white;
-}
-
-.particles {
-  top: 0px;
-  left: 0px;
-  position: fixed;
 }
