@@ -1,11 +1,10 @@
 module.exports = {
   plugins: [
     `gatsby-transformer-json`,
-    `gatsby-plugin-sharp`, 
+    `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-react-helmet`,
-    `gatsby-image`,
-    `gatsby-background-image`,
+    `gatsby-plugin-emotion`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -31,6 +30,6 @@ module.exports = {
         display: "browser",
         icon: `${__dirname}/assets/images/icon.png`,
       },
-    }
+    },
   ],
 }

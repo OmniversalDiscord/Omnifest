@@ -1,8 +1,35 @@
-import React from 'react'
+import React from "react"
 import { StaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
+import styled from "@emotion/styled"
 
-import headerStyles from './header.module.css';
+const HeaderWrapper = styled.header`
+  height: 50px;
+  display: flex;
+  margin: 2px 6px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+`
+
+const HeaderElement = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  padding-left: 4px;
+  padding-right: 4px;
+
+  & > h1 {
+    margin: 0px;
+    margin-bottom: 2px;
+    margin-left: 6px;
+    font-size: 20px;
+  }
+`
 
 const Header = () => {
   return (
@@ -23,27 +50,27 @@ const Header = () => {
               }
             }
           }
-          config: file(relativePath: { eq:"config.json"}) {
+          config: file(relativePath: { eq: "config.json" }) {
             childSettingsJson {
-              name,
+              name
               discord
             }
           }
         }
-    `}
-    render = {data => (
-      <header className={`${headerStyles.header}`}>
-        <div className={headerStyles.wrapper}>
-          <Img fixed={data.logo.childImageSharp.fixed} />
-          <h1>{data.config.childSettingsJson.name}</h1>
-        </div>
-        <div className={headerStyles.wrapper}>
-          <a href={data.config.childSettingsJson.discord}>
-            <Img fixed={data.discord.childImageSharp.fixed} />
-          </a>
-        </div>
-      </header>
-    )}
+      `}
+      render={data => (
+        <HeaderWrapper>
+          <HeaderElement>
+            <Img fixed={data.logo.childImageSharp.fixed} />
+            <h1>{data.config.childSettingsJson.name}</h1>
+          </HeaderElement>
+          <HeaderElement>
+            <a href={data.config.childSettingsJson.discord}>
+              <Img fixed={data.discord.childImageSharp.fixed} />
+            </a>
+          </HeaderElement>
+        </HeaderWrapper>
+      )}
     />
   )
 }

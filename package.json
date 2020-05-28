@@ -5,9 +5,12 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
     "gatsby": "^2.21.37",
     "gatsby-background-image": "^1.1.1",
     "gatsby-image": "^2.4.5",
+    "gatsby-plugin-emotion": "^4.3.2",
     "gatsby-plugin-manifest": "^2.4.9",
     "gatsby-plugin-react-helmet": "^3.3.2",
     "gatsby-plugin-sharp": "^2.6.9",
@@ -33,7 +36,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "GATSBY_GRAPHQL_IDE=playground gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "format": "prettier --tab-width 2 --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
