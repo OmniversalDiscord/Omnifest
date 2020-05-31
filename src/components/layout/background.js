@@ -1,6 +1,5 @@
 import React from "react"
 import { StaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image"
 import { css } from "@emotion/core"
 import Particles from "react-particles-js"
 import BackgroundImage from "gatsby-background-image"

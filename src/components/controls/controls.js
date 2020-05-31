@@ -55,7 +55,7 @@ const Controls = ({
 
       <InfoWrapper>
         {/* If there's no B2B name, don't show it */}
-        {name !== null && <p>{name.toUpperCase()}</p>}
+        {name !== '' && <p>{name.toUpperCase()}</p>}
         <h1>{artists}</h1>
       </InfoWrapper>
     </ControlsWrapper>

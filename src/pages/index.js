@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import { graphql } from "gatsby"
 import AudioSpectrum from "react-audio-spectrum"
+import ReconnectingWebSocket from "reconnecting-websocket";
 
 import Layout from "../components/layout/layout"
 import Controls from "../components/controls/controls"
@@ -28,7 +29,7 @@ const IndexPage = ({ data }) => {
 
   // Only run once
   useEffect(() => {
-    ws.current = new WebSocket(websocketUrl)
+    ws.current = new ReconnectingWebSocket(websocketUrl)
 
     // Stream has to be set here so that the site compiles
     // as GatsbyJS doesn't have an Audio function
