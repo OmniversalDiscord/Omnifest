@@ -1,8 +1,8 @@
 {
   "name": "Trash Bash",
   "discord": "https://discord.gg/nhgC2gH",
-  "streamUrl": "http://audio.omniversal.co:8000/stream.mp3",
-  "websocketUrl": "ws://audio.omniversal.co:8002/",
+  "streamUrl": "https://audio.omniversal.co/stream.mp3",
+  "websocketUrl": "wss://audio.omniversal.co/nowplaying",
   "foreground": "#fff",
   "background": "particles"
 }
