@@ -20,13 +20,13 @@ const HeaderElement = styled.div`
   display: flex;
   align-items: center;
 
-  padding-left: 4px;
+  padding-left: 2px;
   padding-right: 4px;
 
   & > h1 {
     margin: 0px;
     margin-bottom: 2px;
-    margin-left: 6px;
+    margin-left: 8px;
     font-size: 20px;
   }
 `
