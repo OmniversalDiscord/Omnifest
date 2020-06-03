@@ -64,6 +64,7 @@ const Layout = ({ children }) => {
         query LayoutQuery {
           config: file(relativePath: { eq: "config.json" }) {
             childSettingsJson {
+              name
               foreground
             }
           }
@@ -72,7 +73,7 @@ const Layout = ({ children }) => {
       render={data => (
         <>
           <Helmet>
-            <title>Trash Bash</title>
+            <title>{data.config.childSettingsJson.name}</title>
           </Helmet>
           <Global
             styles={globalStyles({

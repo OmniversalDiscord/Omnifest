@@ -4,5 +4,5 @@
   "streamUrl": "https://audio.omniversal.co/stream.mp3",
   "websocketUrl": "wss://audio.omniversal.co/nowplaying",
   "foreground": "#fff",
-  "background": "particles"
+  "background": "image"
 }

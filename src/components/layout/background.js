@@ -16,9 +16,10 @@ const bgStyles = css`
 // Image needs to be larger than the display area to cut off black bars
 const imgBgStyles = css`
   ${bgStyles};
-  margin: -20px;
-  height: 120%;
-  width: 120%;
+  margin-left: -10vw;
+  margin-top: -10vh;
+  height: 120vh;
+  width: 120vw;
   filter: blur(10px);
 `
 
@@ -30,7 +31,7 @@ const Background = () => {
           background: file(relativePath: { eq: "bg.png" }) {
             childImageSharp {
               fluid(maxWidth: 2560) {
-                ...GatsbyImageSharpFluid_withWebp
+                ...GatsbyImageSharpFluid
               }
             }
           }
