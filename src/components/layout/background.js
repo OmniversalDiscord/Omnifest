@@ -20,7 +20,7 @@ const imgBgStyles = css`
   margin-top: -10vh;
   height: 120vh;
   width: 120vw;
-  filter: blur(10px);
+  filter: blur(4px);
 `
 
 const Background = () => {
