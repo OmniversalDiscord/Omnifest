@@ -74,6 +74,9 @@ const Layout = ({ children }) => {
         <>
           <Helmet>
             <title>{data.config.childSettingsJson.name}</title>
+            <meta content="Fox Stevenson Live Discord Sets" property="og:title" />
+            <meta content="The official stream of the Fox Stevenson discord celebration!" property="og:description" />
+            <meta content="Omniversal x Fox Stevenson" property="og:site_name" />
           </Helmet>
           <Global
             styles={globalStyles({
