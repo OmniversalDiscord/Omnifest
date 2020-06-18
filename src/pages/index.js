@@ -49,10 +49,6 @@ const IndexPage = ({ data }) => {
       loadVolume()
       loadMuted()
 
-      // Start playing by default
-      setPlaying(true)
-      stream.play()
-
       // If the stream is trying to load, make sure it's set so the animation can load
       stream.addEventListener("loadstart", () => {
         setLoaded(false)
