@@ -11,7 +11,7 @@ Of note in `config.json` is the background setting, which can either be `particl
 ## Building the site
 
 ```
-npm install -g gatsby
+npm install -g gatsby-cli
 git clone https://github.com/OmniversalDiscord/omnifest-website.git
 cd omnifest-website
 npm install
