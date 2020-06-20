@@ -72,11 +72,11 @@ const Layout = ({ children }) => {
       render={data => (
         <>
           <Helmet>
-            <title>{data.config.childSettingsJson.name}</title>
+            <title>Trash Bash 2: The Reckoning</title>
             <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet" />
-            <meta content="Fox Stevenson Live Discord Sets" property="og:title" />
-            <meta content="The official stream of the Fox Stevenson discord celebration!" property="og:description" />
-            <meta content="Omniversal x Fox Stevenson" property="og:site_name" />
+            <meta content="Trash Bash 2: The Reckoning" property="og:title" />
+            <meta content="The trash is back" property="og:description" />
+            <meta content="Omniversal" property="og:site_name" />
           </Helmet>
           <Global
             styles={globalStyles({
