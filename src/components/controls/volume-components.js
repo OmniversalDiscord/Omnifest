@@ -106,7 +106,7 @@ export function Track({ source, target, getTrackProps }) {
         position: "absolute",
         zIndex: 1,
         borderRadius: 7,
-        backgroundColor: "#fff",
+        backgroundColor: "#000",
         cursor: "pointer",
         width: 14,
         transform: "translate(-50%, 0%)",
