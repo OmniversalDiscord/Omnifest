@@ -24,6 +24,7 @@ const HeaderElement = styled.div`
   padding-right: 4px;
 
   & > h1 {
+    color: red;
     margin: 0px;
     margin-bottom: 2px;
     margin-left: 6px;

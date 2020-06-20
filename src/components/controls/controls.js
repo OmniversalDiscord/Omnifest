@@ -28,6 +28,7 @@ const InfoWrapper = styled.div`
   }
 
   p {
+    color: red;
     opacity: 0.87;
   }
 `
@@ -54,10 +55,15 @@ const Controls = ({
       />
 
       <InfoWrapper>
-        {/* If there's no B2B name, don't show it */}
+        <p>Aeyu x Honabai x Mikei x Vapor</p>
+        <h1>My Garbage Can't Be This Cute!</h1>
+      </InfoWrapper>
+
+      {/*<InfoWrapper>
+        If there's no B2B name, don't show it
         {name !== '' && <p>{name.toUpperCase()}</p>}
         <h1>{artists}</h1>
-      </InfoWrapper>
+      </InfoWrapper>*/}
     </ControlsWrapper>
   )
 }

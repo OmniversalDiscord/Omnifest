@@ -1,8 +1,8 @@
 {
-  "name": "Trash Bash",
+  "name": "Trash Bash 2: The Reckoning",
   "discord": "https://discord.gg/nhgC2gH",
   "streamUrl": "https://audio.omniversal.co/stream.mp3",
   "websocketUrl": "wss://audio.omniversal.co/nowplaying",
-  "foreground": "#fff",
-  "background": "particles"
+  "foreground": "#000",
+  "background": "image"
 }

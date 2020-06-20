@@ -45,7 +45,7 @@ const globalStyles = props => css`
   h1,
   p {
     color: ${props.foreground};
-    font-family: sofia-pro, sans-serif;
+    font-family: 'Permanent Marker', sans-serif;
   }
 
   i {
@@ -73,6 +73,7 @@ const Layout = ({ children }) => {
         <>
           <Helmet>
             <title>{data.config.childSettingsJson.name}</title>
+            <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet" />
             <meta content="Fox Stevenson Live Discord Sets" property="og:title" />
             <meta content="The official stream of the Fox Stevenson discord celebration!" property="og:description" />
             <meta content="Omniversal x Fox Stevenson" property="og:site_name" />

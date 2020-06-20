@@ -12,14 +12,8 @@ const bgStyles = css`
   width: 100%;
   z-index: 0;
 `
-
-// Image needs to be larger than the display area to cut off black bars
 const imgBgStyles = css`
-  ${bgStyles};
-  margin: -20px;
-  height: 120%;
-  width: 120%;
-  filter: blur(10px);
+  ${bgStyles}
 `
 
 const Background = () => {
@@ -29,7 +23,7 @@ const Background = () => {
         query BackgroundQuery {
           background: file(relativePath: { eq: "bg.png" }) {
             childImageSharp {
-              fluid(maxWidth: 2560) {
+              fluid(maxWidth: 2560, quality: 90) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
