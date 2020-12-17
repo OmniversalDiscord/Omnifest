@@ -22,8 +22,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: "Trash Bash",
-        short_name: "Trash Bash",
+        name: "Holiday Bash",
+        short_name: "Holiday Bash",
         start_url: "/",
         background_color: "#000000",
         theme_color: "#000000",
