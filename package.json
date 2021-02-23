@@ -17,6 +17,7 @@
     "gatsby-source-filesystem": "^2.3.8",
     "gatsby-transformer-json": "^2.4.3",
     "gatsby-transformer-sharp": "^2.5.3",
+    "hls.js": "^0.14.17",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-audio-spectrum": "^0.1.0",

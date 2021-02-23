@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react"
-import { graphql } from "gatsby"
-import AudioSpectrum from "react-audio-spectrum"
+import React, { useState, useEffect, useRef } from "react";
+import { graphql } from "gatsby";
+import AudioSpectrum from "react-audio-spectrum";
 import ReconnectingWebSocket from "reconnecting-websocket";
+import Hls from 'hls.js';
 
 import Layout from "../components/layout/layout"
 import Controls from "../components/controls/controls"
@@ -22,10 +23,12 @@ const IndexPage = ({ data }) => {
   const [loadedVolume, setLoadedVolume] = useState(0)
 
   // Stream is a state var as the visualizer needs to be reloaded when the stream is set
-  const [stream, setStream] = useState(null)
+  const [stream, setStream] = useState(new Audio())
 
   // UseRef so that the websocket can be set inside the effect
   const ws = useRef(null)
+
+  var hls = new Hls();
 
   // Only run once
   useEffect(() => {
@@ -33,12 +36,23 @@ const IndexPage = ({ data }) => {
 
     // Stream has to be set here so that the site compiles
     // as GatsbyJS doesn't have an Audio function
-    setStream(new Audio(streamUrl))
+    if (Hls.isSupported()) {
+      hls.loadSource('https://omniversal.co/audio/test.m3u8');
+      hls.attachMedia(stream);
+      //stream.play();
+    } else {
+      alert("FUCK");
+    }
 
     return () => {
       ws.current.close()
     }
-  }, [])
+  }, []);
+
+  const attachHls = () => {
+    hls.loadSource('https://omniversal.co/audio/test.m3u8');
+    hls.attachMedia(stream);
+  }
 
   // Run when stream is set from null to the URL
   // Effectively a run-once but with a predicate that stream isn't null
@@ -87,9 +101,8 @@ const IndexPage = ({ data }) => {
     setPlaying(true)
     setLoaded(false)
 
-    // Set the stream back to the correct URL and start loading
-    stream.src = streamUrl
     stream.load()
+    attachHls();
     stream.play()
   }
 
@@ -177,7 +190,8 @@ const IndexPage = ({ data }) => {
   // Needed to fix a bug where setting crossOrigin in useEffect didn't always work
   const streamWithCORS = () => {
     stream.crossOrigin = "anonymous"
-    return stream
+
+    return stream;
   }
 
   return (
@@ -196,7 +210,7 @@ const IndexPage = ({ data }) => {
           gap={4}
         />
       )}
-      <Controls
+     <Controls
         className="controls"
         name={name}
         artists={artists}
@@ -211,6 +225,23 @@ const IndexPage = ({ data }) => {
     </Layout>
   )
 }
+
+// const IndexPage = ({ data }) => {
+//   const audio = React.createRef()
+
+//   useEffect(() => {
+//     let hls = new Hls();
+//     hls.loadSource('https://omniversal.co/audio/test.m3u8')
+//     hls.attachMedia(audio.current);
+//     audio.current.play()
+//   })
+
+//   return (
+//     <Layout>
+//       <audio ref={audio}/>
+//     </Layout>
+//   )
+// }
 
 export const query = graphql`
   query IndexQuery {
