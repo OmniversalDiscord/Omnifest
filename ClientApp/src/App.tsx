@@ -10,49 +10,68 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Visualizer from "./components/Visualizer";
 import logo from "./logo.png";
+import Hls from "hls.js";
+import config from "./config/festival.json";
 
 function App() {
-  // const particles = useRef<Container>(null);
-  // const [particlesEnabled, setParticlesEnabled] = useState(true);
+  const [stream, _] = useState(new Audio());
+  const [playing, setPlaying] = useState(false);
 
-  // const toggleParticles = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setParticlesEnabled(event.target.checked);
-  //   if (particlesEnabled) {
-  //     particles.current?.pause();
-  //   } else {
-  //     particles.current?.play();
-  //   }
-  // };
+  const hls = new Hls();
+
+  const attachHls = () => {
+    if (Hls.isSupported()) {
+      hls.loadSource(config.stream);
+      hls.attachMedia(stream);
+    } else {
+      stream.src = config.stream;
+    }
+
+    stream.crossOrigin = "anonymous";
+  };
+
+  const togglePlayback = () => {
+    if (playing) {
+      stream.pause();
+    } else {
+      setPlaying(true);
+
+      attachHls();
+      stream.load();
+      stream.play();
+    }
+  };
+
+  stream.onpause = () => {
+    setPlaying(false);
+  };
 
   return (
     <>
-      {/* <Background ref={particles} /> */}
-      <Visualizer />
-      <div className="flex flex-row p-4 justify-between w-full">
-        <div className="flex flex-col flex-grow">
-          <h1 className="font-mono opacity-50 text-xs">now playing</h1>
-          <p className="font-mono text-lg font-bold">shitewavzee</p>
-        </div>
-        {/* <div>
-          <label
-            className="text-white m-4 font-mono opacity-50 text-xs"
-            htmlFor="particlesToggle"
-          >
-            particle motion (for slower cpus)
-          </label>
-          <input
-            type="checkbox"
-            id="particlesToggle"
-            checked={particlesEnabled}
-            onChange={toggleParticles}
+      <Visualizer audio={stream} />
+      <div className="flex flex-row p-4 justify-between w-full z-20">
+        <div className="flex flex-col md:flex-row items-start">
+          <div className="flex flex-col order-last sm:order-first my-4 sm:my-0">
+            <h1 className="font-mono opacity-50 text-xs">now playing</h1>
+            <p className="font-mono text-lg font-bold">shitewavzee</p>
+          </div>
+          <img
+            src={logo}
+            className="h-7 sm:absolute sm:mx-auto sm:left-0 sm:right-0"
           />
-        </div> */}
-        <img src={logo} className="h-7 absolute mx-auto left-0 right-0" />
+        </div>
         <div className="flex flex-row">
-          <p className="font-mono text-xs mx-2">69</p>
-          <FontAwesomeIcon icon={faEye} />
-          <FontAwesomeIcon className="mx-2" icon={faVolumeUp} />
-          <FontAwesomeIcon icon={faPause} />
+          <p className="font-mono text-xs mr-1">69</p>
+          <FontAwesomeIcon className="mx-1" icon={faEye} />
+          <FontAwesomeIcon
+            className="mx-1 cursor-pointer hidden sm:inline"
+            icon={faVolumeUp}
+          />
+          <FontAwesomeIcon
+            className="cursor-pointer ml-1"
+            icon={playing ? faPause : faPlay}
+            onClick={togglePlayback}
+          />
         </div>
       </div>
     </>

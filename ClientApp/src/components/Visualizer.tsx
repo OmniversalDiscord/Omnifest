@@ -338,11 +338,11 @@ class Webgl {
   }
 }
 
-class Audio {
+class Analyzer {
   webgl: Webgl;
   source?: AudioBufferSourceNode;
+  audioElement: HTMLAudioElement;
   audioContext: AudioContext;
-  fileReader: FileReader;
   isReady: boolean;
   count: number;
 
@@ -354,63 +354,59 @@ class Audio {
 
   spectrums!: Uint8Array;
 
-  constructor(_webgl: Webgl, file: HTMLInputElement) {
+  constructor(_webgl: Webgl, audio: HTMLAudioElement) {
     this.webgl = _webgl;
+    this.audioElement = audio;
+    // @ts-ignore
+    var AudioContext = window.AudioContext || window.webkitAudioContext;
     this.audioContext = new AudioContext();
-    this.fileReader = new FileReader();
-    this.init(file);
     this.isReady = false;
     this.count = 0;
+    this.init();
     this.render();
   }
 
-  init(file: HTMLInputElement) {
+  init() {
     this.analyser = this.audioContext.createAnalyser();
     this.analyser.fftSize = 2048;
     this.analyser.minDecibels = -70;
     this.analyser.maxDecibels = 10;
     this.analyser.smoothingTimeConstant = 0.75;
+    let source = this.audioContext.createMediaElementSource(this.audioElement);
+    source.connect(this.analyser);
+    source.connect(this.audioContext.destination);
 
-    file.addEventListener("change", (e: Event) => {
-      let input = e.target as HTMLInputElement;
-      let files = input?.files;
+    // this..onload = () => {
+    //   this.audioContext.decodeAudioData(
+    //     this.fileReader.result as ArrayBuffer,
+    //     (buffer) => {
+    //       if (this.source) {
+    //         this.source.stop();
+    //       }
+    //       this.source = this.audioContext.createBufferSource();
+    //       this.source.buffer = buffer;
 
-      if (files === null) return;
+    //       this.source.loop = true;
 
-      this.fileReader.readAsArrayBuffer(files[0]);
-    });
+    //       this.source.connect(this.analyser);
 
-    this.fileReader.onload = () => {
-      this.audioContext.decodeAudioData(
-        this.fileReader.result as ArrayBuffer,
-        (buffer) => {
-          if (this.source) {
-            this.source.stop();
-          }
-          this.source = this.audioContext.createBufferSource();
-          this.source.buffer = buffer;
+    this.gainNode = this.audioContext.createGain();
 
-          this.source.loop = true;
+    // this.source.connect(this.gainNode);
+    this.gainNode.connect(this.audioContext.destination);
+    // this.source.start(0);
 
-          this.source.connect(this.analyser);
-
-          this.gainNode = this.audioContext.createGain();
-
-          this.source.connect(this.gainNode);
-          this.gainNode.connect(this.audioContext.destination);
-          this.source.start(0);
-
-          this.frequencyArray = this.webgl.sphereG.attributes.aFrequency.array;
-          this.indexPosArray = this.webgl.indexPosArray;
-          this.indexPosLength = this.webgl.indexPosArray.length;
-          this.isReady = true;
-        }
-      );
-    };
+    this.frequencyArray = this.webgl.sphereG.attributes.aFrequency.array;
+    this.indexPosArray = this.webgl.indexPosArray;
+    this.indexPosLength = this.webgl.indexPosArray.length;
+    this.isReady = true;
+    // }
+    // );
+    // };
   }
 
   _render() {
-    if (!this.isReady) return;
+    if (this.audioElement.paused) return;
     this.count++;
 
     this.spectrums = new Uint8Array(this.analyser.frequencyBinCount);
@@ -463,30 +459,29 @@ class Audio {
   }
 }
 
-const Visualizer = () => {
+interface VisualizerProps {
+  audio: HTMLAudioElement;
+}
+
+const Visualizer = (props: VisualizerProps) => {
   const wrapper = useRef<HTMLDivElement>(null);
-  const file = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (wrapper.current === null || file.current === null) {
+    if (wrapper.current === null) {
       return;
     }
 
     let webgl = new Webgl(wrapper.current);
-    new Audio(webgl, file.current);
-  });
+    new Analyzer(webgl, props.audio);
+  }, []);
 
   return (
-    <div ref={wrapper} className="fixed z-10" id="wrapper">
-      <label
-        className="cursor-pointer z-10"
-        style={{ opacity: 0 }}
-        htmlFor="file"
-      >
-        a
-        <input ref={file} className="hidden" id="file" type="file" />
-      </label>
-    </div>
+    <div
+      ref={wrapper}
+      className="fixed"
+      style={{ zIndex: -1 }}
+      id="wrapper"
+    ></div>
   );
 };
 
