@@ -7,7 +7,6 @@
  */
 
 import * as THREE from "three";
-import * as THREEOrbitControls from "three/examples/jsm/controls/OrbitControls.js";
 import { useEffect, useRef } from "react";
 import { IUniform, ShaderMaterialParameters } from "three";
 
@@ -84,10 +83,10 @@ class Webgl {
     this.renderer.domElement.style.width = windowW + "px";
     this.renderer.domElement.style.height = windowH + "px";
 
-    const orbit = new THREEOrbitControls.OrbitControls(
-      this.camera,
-      this.renderer.domElement
-    );
+    // const orbit = new THREEOrbitControls.OrbitControls(
+    //   this.camera,
+    //   this.renderer.domElement
+    // );
     this.windowW = windowW;
     this.windowH = window.innerHeight;
 
@@ -97,14 +96,6 @@ class Webgl {
       old_x: 0,
       old_y: 0,
     };
-
-    //     document.addEventListener( 'mousemove', function(event){
-    //       this.mouse.old_x = this.mouse.x;
-    //       this.mouse.old_y = this.mouse.y;
-
-    //       this.mouse.x = event.clientX - this.windowW / 2;
-    //       this.mouse.y = event.clientY - this.windowH / 2;
-    //     }.bind(this), false );
 
     window.onresize = () => {
       this.windowW = document.body.clientWidth;
@@ -140,7 +131,7 @@ class Webgl {
     });
 
     this.detectIndex();
-    this.sphereG.addAttribute(
+    this.sphereG.setAttribute(
       "aFrequency",
       new THREE.BufferAttribute(new Float32Array(this.indexArray.length), 1)
     );
@@ -154,7 +145,7 @@ class Webgl {
 
   createSphere2() {
     this.sphereG_2 = new THREE.IcosahedronBufferGeometry(39.5, 4);
-    this.sphereG_2.addAttribute(
+    this.sphereG_2.setAttribute(
       "aFrequency",
       new THREE.BufferAttribute(new Float32Array(this.indexArray.length), 1)
     );
@@ -165,8 +156,6 @@ class Webgl {
         uScale: { type: "f", value: 0 } as IUniform,
         isBlack: { type: "i", value: 1 } as IUniform,
       },
-
-      flatShading: true,
     } as ShaderMaterialParameters);
 
     this.mesh_2 = new THREE.Mesh(this.sphereG_2, this.sphereM_2);
@@ -344,18 +333,6 @@ class Webgl {
 
   render() {
     this.sphereG.attributes.aFrequency.needsUpdate = true;
-    // var d = this.mouse.x - this.mouse.old_x;
-    // var theta = d * 0.1;
-    // var sin = Math.sin(theta);
-    // var cos = Math.cos(theta);
-
-    // var x = this.camera.position.x;
-    // var z = this.camera.position.z;
-
-    // this.camera.position.x = x * cos - z * sin;
-    //  this.camera.position.z = x * sin + z * cos;
-
-    // this.camera.lookAt( this.scene.position );
 
     this.renderer.render(this.scene, this.camera);
   }
@@ -395,7 +372,6 @@ class Audio {
     this.analyser.smoothingTimeConstant = 0.75;
 
     file.addEventListener("change", (e: Event) => {
-      //if (e.target === null) return;
       let input = e.target as HTMLInputElement;
       let files = input?.files;
 
@@ -442,7 +418,7 @@ class Audio {
 
     var num,
       mult,
-      frequency,
+      //frequency,
       maxNum = 255,
       frequencyAvg = 0;
 
@@ -497,14 +473,18 @@ const Visualizer = () => {
     }
 
     let webgl = new Webgl(wrapper.current);
-    let audio = new Audio(webgl, file.current);
+    new Audio(webgl, file.current);
   });
 
   return (
-    <div ref={wrapper} className="wrapper" id="wrapper">
-      <label className="file" htmlFor="file">
-        choose a mp3 file
-        <input ref={file} id="file" type="file" />
+    <div ref={wrapper} className="fixed z-10" id="wrapper">
+      <label
+        className="cursor-pointer z-10"
+        style={{ opacity: 0 }}
+        htmlFor="file"
+      >
+        a
+        <input ref={file} className="hidden" id="file" type="file" />
       </label>
     </div>
   );

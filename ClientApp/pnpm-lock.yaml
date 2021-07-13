@@ -2,6 +2,9 @@ lockfileVersion: 5.3
 
 specifiers:
   '@craco/craco': ^6.2.0
+  '@fortawesome/fontawesome-svg-core': ^1.2.35
+  '@fortawesome/free-solid-svg-icons': ^5.15.3
+  '@fortawesome/react-fontawesome': ^0.1.14
   '@microsoft/signalr': ^5.0.7
   '@testing-library/jest-dom': ^5.11.4
   '@testing-library/react': ^11.1.0
@@ -17,13 +20,18 @@ specifiers:
   react: ^17.0.2
   react-dom: ^17.0.2
   react-scripts: 4.0.3
+  react-tsparticles: ^1.31.2
   tailwindcss: npm:@tailwindcss/postcss7-compat@^2.2.4
   three: ^0.130.1
+  tsparticles: ^1.31.1
   typescript: ^4.1.2
   web-vitals: ^1.0.1
 
 dependencies:
   '@craco/craco': 6.2.0_react-scripts@4.0.3
+  '@fortawesome/fontawesome-svg-core': 1.2.35
+  '@fortawesome/free-solid-svg-icons': 5.15.3
+  '@fortawesome/react-fontawesome': 0.1.14_ec0af2bc0907a851e3e0afc4708fd0f0
   '@microsoft/signalr': 5.0.7
   '@testing-library/jest-dom': 5.14.1
   '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
@@ -35,7 +43,9 @@ dependencies:
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-scripts: 4.0.3_react@17.0.2+typescript@4.3.5
+  react-tsparticles: 1.31.2_react@17.0.2
   three: 0.130.1
+  tsparticles: 1.31.1
   typescript: 4.3.5
   web-vitals: 1.1.2
 
@@ -1577,6 +1587,39 @@ packages:
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /@fortawesome/fontawesome-common-types/0.2.35:
+    resolution: {integrity: sha512-IHUfxSEDS9dDGqYwIW7wTN6tn/O8E0n5PcAHz9cAaBoZw6UpG20IG/YM3NNLaGPwPqgjBAFjIURzqoQs3rrtuw==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dev: false
+
+  /@fortawesome/fontawesome-svg-core/1.2.35:
+    resolution: {integrity: sha512-uLEXifXIL7hnh2sNZQrIJWNol7cTVIzwI+4qcBIq9QWaZqUblm0IDrtSqbNg+3SQf8SMGHkiSigD++rHmCHjBg==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 0.2.35
+    dev: false
+
+  /@fortawesome/free-solid-svg-icons/5.15.3:
+    resolution: {integrity: sha512-XPeeu1IlGYqz4VWGRAT5ukNMd4VHUEEJ7ysZ7pSSgaEtNvSo+FLurybGJVmiqkQdK50OkSja2bfZXOeyMGRD8Q==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 0.2.35
+    dev: false
+
+  /@fortawesome/react-fontawesome/0.1.14_ec0af2bc0907a851e3e0afc4708fd0f0:
+    resolution: {integrity: sha512-4wqNb0gRLVaBm/h+lGe8UfPPivcbuJ6ecI4hIgW0LjI7kzpYB9FkN0L9apbVzg+lsBdcTf0AlBtODjcSX5mmKA==}
+    peerDependencies:
+      '@fortawesome/fontawesome-svg-core': ^1.2.32
+      react: '>=16.x'
+    dependencies:
+      '@fortawesome/fontawesome-svg-core': 1.2.35
+      prop-types: 15.7.2
+      react: 17.0.2
     dev: false
 
   /@fullhuman/postcss-purgecss/3.1.3:
@@ -6435,6 +6478,12 @@ packages:
     resolution: {integrity: sha512-6A2fkfq1rfeQZjxrZJGerpLCTHRNEBiSgnu0+obeJpEPZRUooHgsizvzv0ZjJwOz3iWIHdJtVWJ/tmPr3D21/A==}
     dependencies:
       has: 1.0.3
+    dev: false
+
+  /is-core-module/2.5.0:
+    resolution: {integrity: sha512-TXCMSDsEHMEEZ6eCA8rwRDbLu55MRGmrctljsBX/2v1d9/GzqHOxW5c5oPSgrUt2vBFXebu9rGqckXGPWOlYpg==}
+    dependencies:
+      has: 1.0.3
 
   /is-data-descriptor/0.1.4:
     resolution: {integrity: sha1-C17mSDiOLIYCgueT8YVv7D8wG1Y=}
@@ -8501,6 +8550,11 @@ packages:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
     engines: {node: '>=8'}
 
+  /pathseg/1.2.0:
+    resolution: {integrity: sha512-+pQS7lTaoVIXhaCW7R3Wd/165APzZHWzYVqe7dxzdupxQwebgpBaCmf0/XZwmoA/rkDq3qvzO0qv4d5oFVrBRw==}
+    dev: false
+    optional: true
+
   /pbkdf2/3.1.2:
     resolution: {integrity: sha512-iuh7L6jA7JEGu2WxDwtQP1ddOpaJNC4KlDEFfdQajSGgGPNi4OyDc2R7QnbY2bR9QjBVGwgvTdNJZoE7RaxUMA==}
     engines: {node: '>=0.12'}
@@ -9698,6 +9752,16 @@ packages:
       - webpack-plugin-serve
     dev: false
 
+  /react-tsparticles/1.31.2_react@17.0.2:
+    resolution: {integrity: sha512-4KGBjLoLWDYIeqR4u4NLI2tAWYH28hyv3wmLwO1n6pDPHTsIYfgFkGkkRiwE+W3B5nQvogwdAm/u3Rcqll+7UA==}
+    peerDependencies:
+      react: '>=16'
+    dependencies:
+      fast-deep-equal: 3.1.3
+      react: 17.0.2
+      tsparticles: 1.31.1
+    dev: false
+
   /react/17.0.2:
     resolution: {integrity: sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==}
     engines: {node: '>=0.10.0'}
@@ -9978,7 +10042,7 @@ packages:
   /resolve/1.20.0:
     resolution: {integrity: sha512-wENBPt4ySzg4ybFQW2TT1zMQucPK95HSh/nq2CFTZVOGut2+pQvSsgtda4d26YrYcr067wjbmzOG8byDPBX63A==}
     dependencies:
-      is-core-module: 2.4.0
+      is-core-module: 2.5.0
       path-parse: 1.0.7
 
   /resolve/2.0.0-next.3:
@@ -11117,6 +11181,13 @@ packages:
 
   /tslib/2.3.0:
     resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
+    dev: false
+
+  /tsparticles/1.31.1:
+    resolution: {integrity: sha512-FPlOVf5bwQZq/HB6YWMbcCWS3wBotlm+4d031BLl4dVclY4SHpaZ9NTxdcqG/5shE8B85xTKf6iIOCQ2kQKQjQ==}
+    requiresBuild: true
+    optionalDependencies:
+      pathseg: 1.2.0
     dev: false
 
   /tsutils/3.21.0_typescript@4.3.5:
