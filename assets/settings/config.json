@@ -1,8 +1,0 @@
-{
-  "name": "Holiday Bash",
-  "discord": "https://discord.gg/nhgC2gH",
-  "streamUrl": "https://audio.omniversal.co/stream.opus",
-  "websocketUrl": "wss://audio.omniversal.co/nowplaying",
-  "foreground": "#fff",
-  "background": "image"
-}
