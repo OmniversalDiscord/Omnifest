@@ -10,5 +10,11 @@ export default defineConfig({
   build: {
     outDir: "build",
   },
+  server: {
+    hmr: {
+      port: 5001,
+      protocol: 'wss'
+    }
+  },
   plugins: [reactRefresh(), svgr(), reactJsx()],
 });
