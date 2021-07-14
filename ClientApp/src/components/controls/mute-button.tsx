@@ -4,6 +4,7 @@ import { faVolumeMute, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 interface MuteButtonProps {
   className?: string;
   gainNode?: GainNode;
+  style?: React.CSSProperties;
   gain: number;
   muted: boolean;
   setMuted: Function;
@@ -23,6 +24,7 @@ const MuteButton = (props: MuteButtonProps) => {
     <FontAwesomeIcon
       className={`cursor-pointer ${props.className}`}
       icon={props.muted ? faVolumeMute : faVolumeUp}
+      style={props.style}
       onClick={toggleMute}
     />
   );

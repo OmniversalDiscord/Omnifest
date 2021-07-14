@@ -9,11 +9,15 @@ module.exports = {
     extend: {
       zIndex: {
         '-10': '-10',
-      }
+      },
+      transitionProperty: {
+        'width': 'width'
+      },
     },
   },
   variants: {
     extend: {
+      width: ['group-hover']
     },
   },
   plugins: [],

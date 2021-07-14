@@ -69,7 +69,7 @@ const PlayButton = (props: PlayButtonProps) => {
   if (props.state == PlayState.Loading) {
     return (
       <ScaleLoader
-        css="margin-left: 0.25rem"
+        css="margin-left: 0.25rem; display: flex; align-items: center;"
         color="#fff"
         height={15}
         width={3}
