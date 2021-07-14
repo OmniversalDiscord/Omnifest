@@ -20,7 +20,7 @@ const Visualizer = (props: VisualizerProps) => {
     props.getGainNode(analyzer.gainNode);
   }, []);
 
-  return <div ref={wrapper} className="fixed -z-10" id="wrapper"></div>;
+  return <div ref={wrapper} className="fixed -z-10" id="wrapper" />;
 };
 
 export default Visualizer;

@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Omnifest.Hubs;
+using Omnifest.Services;
 
 namespace Omnifest
 {
@@ -24,6 +26,10 @@ namespace Omnifest
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
+            services.AddSignalR();
+
+            services.AddSingleton<ArtistService>();
+            services.AddSingleton<ViewerCountService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +50,16 @@ namespace Omnifest
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
+            string corsString = env.IsDevelopment() ? "http://localhost:3000" : "https://festival.omniversal.co";
+            
+            app.UseCors(builder =>
+            {
+                builder.WithOrigins(corsString)
+                    .AllowAnyHeader()
+                    .WithMethods("GET", "POST")
+                    .AllowCredentials();
+            });
+            
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
@@ -51,6 +67,7 @@ namespace Omnifest
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapHub<StreamHub>("/streamHub");
             });
 
             app.UseSpa(spa =>

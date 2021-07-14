@@ -24,10 +24,6 @@
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Controllers" />
-    </ItemGroup>
-
     <!--
     <ItemGroup>
       <TypeScriptCompile Include="ClientApp\src\visualizer\Visualizer.tsx" />

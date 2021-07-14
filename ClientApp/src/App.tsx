@@ -4,13 +4,24 @@ import logo from "./logo.png";
 import config from "./config/festival.json";
 import Controls from "./components/controls";
 import { PlayState } from "./components/controls/play-button";
+import { Helmet } from "react-helmet";
+import * as signalR from "@microsoft/signalr";
+import { HubConnection } from "@microsoft/signalr";
 
 const stream = new Audio();
 
 function App() {
+  const connection = useRef<HubConnection | null>(null);
+
+  const [viewers, setViewers] = useState<number>();
+  const [artist, setArtist] = useState("");
+
   const [playing, setPlaying] = useState(PlayState.Paused);
   const [muted, setMuted] = useState(false);
   const [gain, setGain] = useState(0);
+
+  // Needed as the gain node is created in the visualizer
+  const [gainNode, setGainNode] = useState<GainNode>();
 
   // Extend setGain to save the gain to the browser
   // so that volume setting can persist on reload
@@ -22,6 +33,8 @@ function App() {
 
   // Load gain on start
   useEffect(() => {
+    if (gainNode === undefined) return;
+    
     let gainValue = parseFloat(localStorage.getItem("gain") ?? "0");
     gainValue = isNaN(gainValue) ? 0 : gainValue;
 
@@ -32,19 +45,37 @@ function App() {
     }
 
     setGain(gainValue);
+    gainNode.gain.value = gainValue;
+  }, [gainNode]);
+
+  // Set up SignalR connection
+  useEffect(() => {
+    connection.current = new signalR.HubConnectionBuilder()
+      .withUrl("https://localhost:5001/streamHub")
+      .build();
+
+    connection.current?.start();
   }, []);
 
-  // Needed as the gain node is created in the visualizer
-  const [gainNode, setGainNode] = useState<GainNode>();
+  connection.current?.on("updateViewCount", (viewers: number) => {
+    setViewers(viewers);
+  });
+
+  connection.current?.on("updateArtist", (artist: string) => {
+    setArtist(artist);
+  });
 
   return (
     <>
+      <Helmet>
+        <title>{config.title}</title>
+      </Helmet>
       <Visualizer getGainNode={setGainNode} audio={stream} />
       <div className="flex flex-row p-4 justify-between w-full z-20">
         <div className="flex flex-col md:flex-row items-start md:items-center">
           <div className="flex flex-col order-last sm:order-first my-4 sm:my-0">
             <h1 className="font-mono opacity-50 text-xs">now playing</h1>
-            <p className="font-mono text-lg font-bold">Rob Gasser</p>
+            <p className="font-mono text-lg font-bold">{artist}</p>
           </div>
           <img
             src={logo}
@@ -55,7 +86,7 @@ function App() {
         <Controls
           stream={stream}
           gainNode={gainNode}
-          viewers={24}
+          viewers={viewers}
           gain={gain}
           setGain={setAndSaveGain}
           muted={muted}

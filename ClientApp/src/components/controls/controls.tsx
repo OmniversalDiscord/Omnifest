@@ -7,7 +7,7 @@ import PlayButton, { PlayState } from "./play-button";
 interface ControlProps {
   stream: HTMLAudioElement;
   gainNode?: GainNode;
-  viewers: number;
+  viewers?: number;
   gain: number;
   setGain: Function;
   muted: boolean;
