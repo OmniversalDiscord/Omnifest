@@ -1,78 +1,44 @@
 import { useState, useRef, useEffect } from "react";
-import { Container } from "tsparticles";
-import Background from "./components/Background";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEye,
-  faVolumeUp,
-  faPlay,
-  faPause,
-} from "@fortawesome/free-solid-svg-icons";
-import Visualizer from "./components/Visualizer";
+import Visualizer from "./components/visualizer";
 import logo from "./logo.png";
-import Hls from "hls.js";
 import config from "./config/festival.json";
+import Controls from "./components/controls";
+import { PlayState } from "./components/controls/play-button";
+
+const stream = new Audio();
 
 function App() {
-  const [stream, _] = useState(new Audio());
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(PlayState.Paused);
+  const [muted, setMuted] = useState(false);
+  const [gain, setGain] = useState(0);
 
-  const hls = new Hls();
-
-  const attachHls = () => {
-    if (Hls.isSupported()) {
-      hls.loadSource(config.stream);
-      hls.attachMedia(stream);
-    } else {
-      stream.src = config.stream;
-    }
-
-    stream.crossOrigin = "anonymous";
-  };
-
-  const togglePlayback = () => {
-    if (playing) {
-      stream.pause();
-    } else {
-      setPlaying(true);
-
-      attachHls();
-      stream.load();
-      stream.play();
-    }
-  };
-
-  stream.onpause = () => {
-    setPlaying(false);
-  };
+  // Needed as the gain node is created in the visualizer
+  const [gainNode, setGainNode] = useState<GainNode>();
 
   return (
     <>
-      <Visualizer audio={stream} />
+      <Visualizer getGainNode={setGainNode} audio={stream} />
       <div className="flex flex-row p-4 justify-between w-full z-20">
         <div className="flex flex-col md:flex-row items-start">
           <div className="flex flex-col order-last sm:order-first my-4 sm:my-0">
             <h1 className="font-mono opacity-50 text-xs">now playing</h1>
-            <p className="font-mono text-lg font-bold">shitewavzee</p>
+            <p className="font-mono text-lg font-bold">Rob Gasser</p>
           </div>
           <img
             src={logo}
             className="h-7 sm:absolute sm:mx-auto sm:left-0 sm:right-0"
           />
         </div>
-        <div className="flex flex-row">
-          <p className="font-mono text-xs mr-1">69</p>
-          <FontAwesomeIcon className="mx-1" icon={faEye} />
-          <FontAwesomeIcon
-            className="mx-1 cursor-pointer hidden sm:inline"
-            icon={faVolumeUp}
-          />
-          <FontAwesomeIcon
-            className="cursor-pointer ml-1"
-            icon={playing ? faPause : faPlay}
-            onClick={togglePlayback}
-          />
-        </div>
+        <Controls
+          stream={stream}
+          gainNode={gainNode}
+          viewers={69}
+          gain={gain}
+          muted={muted}
+          setMuted={setMuted}
+          playingState={playing}
+          setPlayState={setPlaying}
+        />
       </div>
     </>
   );

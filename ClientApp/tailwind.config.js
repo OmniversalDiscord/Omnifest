@@ -6,10 +6,15 @@ module.exports = {
     fontFamily: {
       'mono': ['Fira\\ Code', 'monospace']
     },
-    extend: {},
+    extend: {
+      zIndex: {
+        '-10': '-10',
+      }
+    },
   },
   variants: {
-    extend: {},
+    extend: {
+    },
   },
   plugins: [],
 };
