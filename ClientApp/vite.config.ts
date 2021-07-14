@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react-refresh'
-import svgr from 'vite-plugin-svgr'
+import * as svgr from 'vite-plugin-svgr'
 import reactJsx from 'vite-react-jsx';
 
 // https://vitejs.dev/config/
