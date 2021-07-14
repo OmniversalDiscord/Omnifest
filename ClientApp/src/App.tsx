@@ -4,7 +4,7 @@ import logo from "./logo.png";
 import config from "./config/festival.json";
 import Controls from "./components/controls";
 import { PlayState } from "./components/controls/play-button";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import * as signalR from "@microsoft/signalr";
 import { HubConnection } from "@microsoft/signalr";
 
@@ -34,7 +34,7 @@ function App() {
   // Load gain on start
   useEffect(() => {
     if (gainNode === undefined) return;
-    
+
     let gainValue = parseFloat(localStorage.getItem("gain") ?? "0");
     gainValue = isNaN(gainValue) ? 0 : gainValue;
 
@@ -46,7 +46,7 @@ function App() {
 
     setGain(gainValue);
     gainNode.gain.value = gainValue;
-  }, [gainNode]);
+  }, [gainNode]); // Gain node is a dependency to ensure that it's properly set
 
   // Set up SignalR connection
   useEffect(() => {
@@ -57,6 +57,7 @@ function App() {
     connection.current?.start();
   }, []);
 
+  // SignalR methods
   connection.current?.on("updateViewCount", (viewers: number) => {
     setViewers(viewers);
   });
@@ -66,7 +67,7 @@ function App() {
   });
 
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <title>{config.title}</title>
       </Helmet>
@@ -95,7 +96,7 @@ function App() {
           setPlayState={setPlaying}
         />
       </div>
-    </>
+    </HelmetProvider>
   );
 }
 
