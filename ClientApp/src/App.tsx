@@ -27,7 +27,6 @@ function App() {
   // so that volume setting can persist on reload
   const setAndSaveGain = (gainValue: number) => {
     localStorage.setItem("gain", `${gainValue}`);
-    console.log(gainValue);
     setGain(gainValue);
   };
 
