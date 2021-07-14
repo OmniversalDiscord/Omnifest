@@ -49,6 +49,7 @@ function App() {
           <img
             src={logo}
             className="h-7 sm:absolute sm:mx-auto sm:left-0 sm:right-0"
+            alt="Omniversal Logo"
           />
         </div>
         <Controls
