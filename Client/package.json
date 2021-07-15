@@ -22,7 +22,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "echo Starting the development server && vite --host",
+    "start": "vite --host",
     "build": "tsc && vite build",
     "serve": "vite preview"
   },
