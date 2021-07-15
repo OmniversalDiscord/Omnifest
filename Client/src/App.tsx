@@ -107,6 +107,7 @@ function App() {
           onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
             setVisualizerEnabled(!visualizerEnabled);
             e.preventDefault();
+            throw new Error("Sentry test");
           }}
           className={visualizerEnabled ? "" : "opacity-50"}
           href="#"
