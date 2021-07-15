@@ -14,6 +14,7 @@ class Analyzer {
   audioContext: AudioContext;
   isReady: boolean;
   count: number;
+  requestId?: number;
 
   analyser!: AnalyserNode;
   gainNode!: GainNode;
@@ -58,6 +59,7 @@ class Analyzer {
 
   _render() {
     if (this.audioElement.paused) return;
+
     this.count++;
 
     this.spectrums = new Uint8Array(this.analyser.frequencyBinCount);
@@ -105,7 +107,19 @@ class Analyzer {
   render() {
     this._render();
     this.webgl.render();
-    requestAnimationFrame(this.render.bind(this));
+    this.requestId = requestAnimationFrame(this.render.bind(this));
+  }
+
+  startRender() {
+    this.requestId = requestAnimationFrame(this.render.bind(this));
+  }
+
+  pauseRender() {
+    this.webgl.renderer.clear();
+    if (this.requestId === undefined) return;
+
+    cancelAnimationFrame(this.requestId);
+    this.requestId = undefined;
   }
 }
 

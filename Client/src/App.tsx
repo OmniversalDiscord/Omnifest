@@ -20,6 +20,8 @@ function App() {
   const [muted, setMuted] = useState(false);
   const [gain, setGain] = useState(0);
 
+  const [visualizerEnabled, setVisualizerEnabled] = useState(true);
+
   // Needed as the gain node is created in the visualizer
   const [gainNode, setGainNode] = useState<GainNode>();
 
@@ -70,11 +72,6 @@ function App() {
       <Helmet>
         <title>{config.title}</title>
       </Helmet>
-      <Visualizer
-        start={playing != PlayState.Paused}
-        getGainNode={setGainNode}
-        audio={stream}
-      />
       <div className="flex flex-row p-4 justify-between w-full z-20 fixed">
         <div className="flex flex-col md:flex-row items-start md:items-center">
           <div className="flex flex-col order-last sm:order-first my-4 sm:my-0">
@@ -99,6 +96,32 @@ function App() {
           setPlayState={setPlaying}
         />
       </div>
+      <Visualizer
+        start={playing != PlayState.Paused}
+        enabled={visualizerEnabled}
+        getGainNode={setGainNode}
+        audio={stream}
+      />
+      <p className="font-mono z-20 fixed bottom-2 right-4 opacity-50 text-sm">
+        <a
+          onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+            setVisualizerEnabled(!visualizerEnabled);
+            e.preventDefault();
+          }}
+          className={visualizerEnabled ? "" : "opacity-50"}
+          href="#"
+        >
+          {visualizerEnabled ? "visualizer on" : "visualizer off"}
+        </a>{" "}
+        |{" "}
+        <a target="_blank" href="https://omniversal.co/discord">
+          discord
+        </a>{" "}
+        |{" "}
+        <a target="_blank" href="https://justgiving.com/fundraising/omnifest2">
+          donate
+        </a>
+      </p>
     </HelmetProvider>
   );
 }
