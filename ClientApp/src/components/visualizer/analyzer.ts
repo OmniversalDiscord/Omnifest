@@ -1,3 +1,11 @@
+/*
+ * Modified version of Misaki Nakano's visualizer CodePen (https://codepen.io/mnmxmx/pen/mmZbPK/)
+ * for React and TypeScript, although not the most idiomatic code
+ *
+ * Copyright (c) 2017 Misaki Nakano
+ * Licensed under MIT (https://opensource.org/licenses/MIT)
+ */
+
 import Webgl from "./webgl";
 
 class Analyzer {
