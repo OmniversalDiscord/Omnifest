@@ -24,6 +24,7 @@ specifiers:
   react-helmet-async: ^1.0.9
   react-scripts: 4.0.3
   react-spinners: ^0.11.0
+  rollup-plugin-brotli: ^3.1.0
   tailwindcss: ^2.2.4
   three: ^0.130.1
   typescript: ^4.1.2
@@ -46,6 +47,7 @@ dependencies:
   react-helmet-async: 1.0.9_react-dom@17.0.2+react@17.0.2
   react-scripts: 4.0.3_react@17.0.2+typescript@4.3.5
   react-spinners: 0.11.0_28c0df05a9559c3217649c6005b51123
+  rollup-plugin-brotli: 3.1.0
   three: 0.130.1
   typescript: 4.3.5
   vite: 2.4.2
@@ -10275,6 +10277,11 @@ packages:
       '@babel/helper-module-imports': 7.14.5
       rollup: 1.32.1
       rollup-pluginutils: 2.8.2
+    dev: false
+
+  /rollup-plugin-brotli/3.1.0:
+    resolution: {integrity: sha512-vXRPVd9B1x+aaXeBdmLKNNsai9AH3o0Qikf4u0m1icKqgi3qVA4UhOfwGaPYoAHML1GLMUnR//PDhiMHXN/M6g==}
+    engines: {node: '>=11.7.0'}
     dev: false
 
   /rollup-plugin-terser/5.3.1_rollup@1.32.1:
