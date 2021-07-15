@@ -9,12 +9,7 @@ export default defineConfig({
   // comment this out if that isn't relevant for your project
   build: {
     outDir: "build",
-  },
-  server: {
-    hmr: {
-      port: 5001,
-      protocol: 'wss'
-    }
+    sourcemap: true,
   },
   plugins: [reactRefresh(), svgr(), reactJsx()],
 });

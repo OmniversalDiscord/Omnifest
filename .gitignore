@@ -1,9 +1,29 @@
 bin/
 obj/
-/packages/
+Server/packages/
 riderModule.iml
-/_ReSharper.Caches/
+Server/_ReSharper.Caches/
 .idea/
 .vscode/
 .DS_Store
-/Omnifest.sln.DotSettings.user
+Omnifest.sln.DotSettings.user
+
+# dependencies
+node_modules/
+
+# testing
+coverage/
+
+# production
+build/
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
