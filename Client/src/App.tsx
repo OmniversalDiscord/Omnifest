@@ -70,7 +70,11 @@ function App() {
       <Helmet>
         <title>{config.title}</title>
       </Helmet>
-      <Visualizer getGainNode={setGainNode} audio={stream} />
+      <Visualizer
+        start={playing != PlayState.Paused}
+        getGainNode={setGainNode}
+        audio={stream}
+      />
       <div className="flex flex-row p-4 justify-between w-full z-20 fixed">
         <div className="flex flex-col md:flex-row items-start md:items-center">
           <div className="flex flex-col order-last sm:order-first my-4 sm:my-0">
