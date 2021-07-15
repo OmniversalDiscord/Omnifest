@@ -19,7 +19,6 @@ namespace Omnifest.Controllers
             _streamHub = streamHub;
         }
         
-        // GET
         [HttpPost]
         public async Task<ActionResult<string>> SetArtist(string artist)
         {

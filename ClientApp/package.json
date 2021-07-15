@@ -7,6 +7,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@microsoft/signalr": "^5.0.7",
+    "@sentry/react": "^6.9.0",
+    "@sentry/tracing": "^6.9.0",
     "hls.js": "^1.0.7",
     "react": "^17.0.2",
     "react-compound-slider": "^3.3.1",
