@@ -52,7 +52,7 @@ function App() {
   // Set up SignalR connection
   useEffect(() => {
     connection.current = new signalR.HubConnectionBuilder()
-      .withUrl("https://localhost:5001/streamHub")
+      .withUrl("https://festivalapi.omniversal.co/streamHub")
       .build();
 
     connection.current?.start();
