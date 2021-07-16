@@ -49,6 +49,7 @@ namespace Omnifest
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Omnifest v1"));
+                app.UseHttpsRedirection();
             }
 
             string corsString = env.IsDevelopment() ? "http://localhost:3000" : "https://festival.omniversal.co";
@@ -60,8 +61,6 @@ namespace Omnifest
                     .WithMethods("GET", "POST")
                     .AllowCredentials();
             });
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
