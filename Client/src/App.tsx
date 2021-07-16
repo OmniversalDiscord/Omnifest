@@ -102,13 +102,13 @@ function App() {
         getGainNode={setGainNode}
         audio={stream}
       />
-      <p className="font-mono z-20 fixed bottom-2 right-4 opacity-50 text-sm">
+      <p className="font-mono z-20 fixed bottom-6 right-4 opacity-50 text-sm">
         <a
           onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
             setVisualizerEnabled(!visualizerEnabled);
             e.preventDefault();
           }}
-          className={visualizerEnabled ? "" : "opacity-50"}
+          className={`border-white border-2 px-2 py-1 rounded-lg ${visualizerEnabled ? "bg-white text-gray-800" : "opacity-50"}`}
           href="#"
         >
           {visualizerEnabled ? "visualizer on" : "visualizer off"}
